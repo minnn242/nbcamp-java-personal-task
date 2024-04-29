@@ -2,21 +2,33 @@ package calculator;
 
 import java.util.Scanner;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
-        final int MAX_RESULTS = 10;
-        double[] results = new double[MAX_RESULTS]; // 연산 결과를 저장할 배열 선언 및 생성
-        int count = 0; // 연산 결과를 저장한 횟수를 나타내는 변수
+        List<Double> results = new ArrayList<>(); // 연산 결과를 저장할 리스트 선언
 
         // 무한 반복을 위한 while 루프
         while (true) {
-            // 사용자에게 연산 기호와 숫자를 입력 받습니다.
-            System.out.print("사칙 연산 기호를 입력하세요 (+, -, *, /), 또는 'exit'을 입력하여 종료하세요: ");
+            //  연산 기호와 숫자를 입력 받습니다.
+            System.out.print("사칙 연산 기호를 입력하세요 (+, -, *, /), 또는 'remove'를 입력하여 가장 먼저 저장된 결과를 삭제하고 싶다면 입력하세요: ");
             String input = scanner.nextLine();
 
-            // 사용자가 "exit"을 입력하면 프로그램을 종료합니다.
+            // "remove"를 입력하면 리스트에서 가장 먼저 저장된 결과를 삭제합니다.
+            if (input.equals("remove")) {
+                if (!results.isEmpty()) {
+                    Double removedResult = results.remove(0); // 리스트에서 첫 번째 요소 제거
+                    System.out.println("가장 먼저 저장된 결과 " + removedResult + "가 삭제");
+                } else {
+                    System.out.println("저장된 결과가 없습니다.");
+                }
+                continue; // 다음 반복으로 넘어감
+            }
+
+            // "exit"을 입력하면 프로그램을 종료합니다.
             if (input.equals("exit")) {
                 System.out.println("프로그램을 종료합니다.");
                 break;
@@ -66,26 +78,13 @@ public class App {
                     error = true; // 오류 발생
             }
 
-            // 오류가 발생하지 않았을 경우에만 결과를 출력하고 배열에 저장합니다.
+            // 오류가 발생하지 않았을 경우에만 결과를 출력하고 리스트에 저장합니다.
             if (!error) {
                 System.out.println("결과: " + result);
-                if (count < MAX_RESULTS) {
-                    results[count] = result; // 배열에 연산 결과 저장
-                    count++; // 카운트 증가
-                } else {
-                    System.out.println("더 이상 연산 결과를 저장할 공간이 없습니다.");
-                }
+                results.add(result); // 리스트에 연산 결과 저장
             }
         }
 
-        // 저장된 연산 결과 출력
-        System.out.println("\n저장된 연산 결과:");
-        for (int i = 0; i < count; i++) {
-            System.out.println("결과 " + (i + 1) + ": " + results[i]);
-        }
-
-        scanner.close(); // 스캐너를 닫습니다.
+        scanner.close();
     }
 }
-
-
