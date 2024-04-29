@@ -5,6 +5,11 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        int[] intArray = new int[10];
+//        intArray[3] = 10; 값 저장
+//        intArray[index++] = (int) result;
+
+        int index = 0;
         while (true) {
             // 사용자에게 연산 기호와 숫자를 입력 받습니다.
             System.out.print("사칙 연산 기호를 입력하세요 (+, -, *, /): ");
@@ -16,7 +21,6 @@ public class App {
 
             // switch 문을 사용하여 입력된 연산 기호에 따라 적절한 연산을 수행합니다.
             double result = 0;
-            boolean error = false; // 오류 발생 여부를 나타내는 변수
 
             switch (operator) {
                 case '+':
@@ -38,12 +42,12 @@ public class App {
                     break;
                 default:
                     System.out.println("잘못된 연산 기호입니다. 사칙 연산 기호를 입력하세요 (+, -, *, /)");
-
             }
             System.out.println("결과: " + (int) result);
-
+            intArray[index++] = (int) result;
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             String pri = scanner.next();
+
             if (pri.equals("exit")) {
                 break;
             }
