@@ -1,17 +1,16 @@
 package calculator;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int[] intArray = new int[10];
-//        intArray[3] = 10; 값 저장
-//        intArray[index++] = (int) result;
+//        컬랙션 List 선언 및 생성
+        ArrayList<Integer> intList =  new ArrayList<Integer>();
 
-        int index = 0;
         while (true) {
             // 사용자에게 연산 기호와 숫자를 입력 받습니다.
             System.out.print("사칙 연산 기호를 입력하세요 (+, -, *, /): ");
@@ -44,19 +43,9 @@ public class App {
                 default:
                     System.out.println("잘못된 연산 기호입니다. 사칙 연산 기호를 입력하세요 (+, -, *, /)");
             }
+            intList.add(result);
 
-            if (index >= 10) {
-                for (int i = 0; i < intArray.length - 1; i++) {            // intArray[0] = intArray[1];
-                    intArray[i] = intArray[i + 1];                        // intArray[1] = intArray[2]
-                }
-                intArray[9] = result;
-            }
-            else {
-                intArray[9] = result;
-                index++;
-            }
-
-            System.out.println("결과: " + Arrays.toString(intArray));
+            System.out.println("결과:"+ intList);
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             String pri = scanner.next();
 
