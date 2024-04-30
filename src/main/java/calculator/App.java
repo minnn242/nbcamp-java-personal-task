@@ -1,5 +1,7 @@
 package calculator;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class App {
@@ -15,12 +17,12 @@ public class App {
             System.out.print("사칙 연산 기호를 입력하세요 (+, -, *, /): ");
             char operator = scanner.next().charAt(0);
             System.out.print("첫 번째 숫자를 입력하세요: ");
-            double num1 = scanner.nextDouble();
+            int num1 = scanner.nextInt();
             System.out.print("두 번째 숫자를 입력하세요: ");
-            double num2 = scanner.nextDouble();
+            int num2 = scanner.nextInt();
 
             // switch 문을 사용하여 입력된 연산 기호에 따라 적절한 연산을 수행합니다.
-            double result = 0;
+            int result = 0;
 
             switch (operator) {
                 case '+':
@@ -35,7 +37,6 @@ public class App {
                 case '/':
                     if (num2 == 0) {
                         System.out.println("나눗셈 연산에서 분모(두번째 숫자)에 0이 입력될 수 없습니다.");
-                        error = true; // 오류 발생
                     } else {
                         result = num1 / num2;
                     }
@@ -43,8 +44,19 @@ public class App {
                 default:
                     System.out.println("잘못된 연산 기호입니다. 사칙 연산 기호를 입력하세요 (+, -, *, /)");
             }
-            System.out.println("결과: " + (int) result);
-            intArray[index++] = (int) result;
+
+            if (index >= 10) {
+                for (int i = 0; i < intArray.length - 1; i++) {            // intArray[0] = intArray[1];
+                    intArray[i] = intArray[i + 1];                        // intArray[1] = intArray[2]
+                }
+                intArray[9] = result;
+            }
+            else {
+                intArray[9] = result;
+                index++;
+            }
+
+            System.out.println("결과: " + Arrays.toString(intArray));
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             String pri = scanner.next();
 
