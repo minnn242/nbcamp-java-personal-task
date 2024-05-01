@@ -44,7 +44,8 @@ public class App {
                     System.out.println("잘못된 연산 기호입니다. 사칙 연산 기호를 입력하세요 (+, -, *, /)");
             }
             intList.add(result);
-
+            System.out.println("가장 먼저 저장된 연산 결과를 삭제 하시겠습니다? ");
+            System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry를 입력하면 종료)");
             System.out.println("결과:"+ intList);
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             String pri = scanner.next();
